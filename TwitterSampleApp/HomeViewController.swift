@@ -38,6 +38,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         setTweetData()
         tableView.reloadData()
+        print("hoge")
     }
     
 //  追加ボタン
@@ -45,7 +46,7 @@ class HomeViewController: UIViewController {
         transitionToEditView()
     }
     
-//  ダミーデータ
+//  データ取得
     func setTweetData() {
         let realm = try! Realm()
         let result = realm.objects(TweetDataModel.self)
@@ -74,6 +75,7 @@ class HomeViewController: UIViewController {
     func transitionToEditView() {
         let storyboard = UIStoryboard(name: "TweetCreateViewController", bundle: nil)
         guard let createViewController = storyboard.instantiateInitialViewController() as? TweetCreateViewController else { return }
+        createViewController.modalPresentationStyle = .fullScreen
         present(createViewController, animated: true, completion: nil)
     }
 }
@@ -89,11 +91,31 @@ extension HomeViewController: UITableViewDataSource {
         cell.configure(name: tweetDataModel.name, tweet: tweetDataModel.text)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let targetTweet = tweetDataList[indexPath.row]
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(targetTweet)
+        }
+        tweetDataList.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
 }
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.estimatedRowHeight = 70
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tweetDetailViewController = storyboard.instantiateViewController(withIdentifier: "TweetDetailViewController") as! TweetDetailViewController
+        let textData = tweetDataList[indexPath.row]
+        tweetDetailViewController.configure(text: textData)
+        tableView.deselectRow(at: indexPath, animated: true)
+        tweetDetailViewController.modalPresentationStyle = .fullScreen
+        navigationController?.present(tweetDetailViewController, animated: true, completion: nil)
     }
 }

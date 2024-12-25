@@ -1,16 +1,16 @@
 //
-//  TweetCreateViewController.swift
+//  TweetDetailViewController.swift
 //  TwitterSampleApp
 //
-//  Created by 髙坂澄怜 on 2024/12/04.
+//  Created by 髙坂澄怜 on 2024/12/23.
 //
 
 import UIKit
 import RealmSwift
 
-class TweetCreateViewController: UIViewController, UITextFieldDelegate {
+class TweetDetailViewController: UIViewController {
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var tweetField: UITextView!
+    @IBOutlet weak var tweetView: UITextView!
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var warningText: UILabel!
     
@@ -18,62 +18,62 @@ class TweetCreateViewController: UIViewController, UITextFieldDelegate {
     let maxCharasetCount: Int = 5
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        displayData()
         configurebutton()
-        configureTweetField()
-        setDoneButton()
+        configureTweetView()
         
-        tweetField.delegate = self
+        tweetView.delegate = self
+    }
+    
+    func configure(text: TweetDataModel) {
+        tweetData = text
+        print("データは\(tweetData.text)と\(tweetData.name)です")
     }
     
     func configurebutton() {
         postButton.layer.cornerRadius = postButton.frame.height / 2
     }
     
-    func configureTweetField() {
+    func configureTweetView() {
         // tweetFieldのレイアウトを設定
-        tweetField.layer.borderColor = UIColor.lightGray.cgColor
-        tweetField.layer.borderWidth = 0.5
-        tweetField.layer.cornerRadius = 5
+        tweetView.layer.borderColor = UIColor.lightGray.cgColor
+        tweetView.layer.borderWidth = 0.5
+        tweetView.layer.cornerRadius = 5
     }
     
-    @objc func tapDoneButton() {
-        view.endEditing(true)
-    }
-    
-    func setDoneButton() {
-        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
-        let commitButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapDoneButton))
-        toolBar.items = [commitButton]
-        nameField.inputAccessoryView = toolBar
-        tweetField.inputAccessoryView = toolBar
-    }
-    
-//  投稿ボタン
-    @IBAction func tappedSaveButton(_ sender: UIButton) {
+//  確定ボタン
+    @IBAction func addButton(_ sender: UIButton) {
         saveData()
     }
+    
 //  キャンセルボタン
-    @IBAction func tappedCancelButton(_ sender: UIButton) {
+    @IBAction func cancelButton(_ sender: UIButton) {
         dismiss(animated: true)
     }
     
-    func saveData() {
+    
+    func displayData() {
+        nameField.text = tweetData.name
+        tweetView.text = tweetData.text
+    }
+    
+    func saveData(){
         let realm = try! Realm()
         try! realm.write {
             tweetData.name = nameField.text ?? ""
-            tweetData.text = tweetField.text ?? ""
+            tweetData.text = tweetView.text ?? ""
             realm.add(tweetData)
         }
         print("name: \(tweetData.name)")
         dismiss(animated: true)
     }
-    
 }
 
-extension TweetCreateViewController: UITextViewDelegate {
+extension TweetDetailViewController: UITextViewDelegate {
     // 入力した文字を保存・140文字の制限
     func textViewDidChange(_ tweetField: UITextView) {
-        let updatedText = tweetField.text ?? ""
+        let updatedText = tweetView.text ?? ""
         
         if updatedText.count > maxCharasetCount {
             let warningText = "\(maxCharasetCount)文字以内で入力してください"
