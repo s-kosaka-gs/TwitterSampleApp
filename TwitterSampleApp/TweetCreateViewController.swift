@@ -15,7 +15,6 @@ class TweetCreateViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var warningText: UILabel!
     
     var tweetData = TweetDataModel()
-    let maxCharasetCount: Int = 5
     
     override func viewDidLoad() {
         configurebutton()
@@ -24,7 +23,7 @@ class TweetCreateViewController: UIViewController, UITextFieldDelegate {
         
         tweetField.delegate = self
     }
-    
+        
     func configurebutton() {
         postButton.layer.cornerRadius = postButton.frame.height / 2
     }
@@ -74,6 +73,7 @@ extension TweetCreateViewController: UITextViewDelegate {
     // 入力した文字を保存・140文字の制限
     func textViewDidChange(_ tweetField: UITextView) {
         let updatedText = tweetField.text ?? ""
+        let maxCharasetCount: Int = 140
         
         if updatedText.count > maxCharasetCount {
             let warningText = "\(maxCharasetCount)文字以内で入力してください"

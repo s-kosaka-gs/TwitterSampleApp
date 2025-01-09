@@ -5,13 +5,20 @@
 //  Created by 髙坂澄怜 on 2024/11/27.
 //
 
-import Testing
+import XCTest
 @testable import TwitterSampleApp
 
-struct TwitterSampleAppTests {
+class exmpleTests: XCTestCase {
 
-    @Test func example() async throws {
+    func testExample() throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+        let vc = TweetCreateViewController()
+        let updatedText = vc.tweetField.text ?? ""
+        let maxCharasetCount: Int = 140
+        
+        XCTAssertTrue(maxCharasetCount > updatedText.count)
+        XCTAssertFalse(maxCharasetCount <= updatedText.count)
+
     }
 
 }

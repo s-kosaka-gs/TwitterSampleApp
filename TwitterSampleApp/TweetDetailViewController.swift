@@ -15,7 +15,7 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var warningText: UILabel!
     
     var tweetData = TweetDataModel()
-    let maxCharasetCount: Int = 5
+    let maxCharasetCount: Int = 140
     
     override func viewDidLoad() {
         super.viewDidLoad()

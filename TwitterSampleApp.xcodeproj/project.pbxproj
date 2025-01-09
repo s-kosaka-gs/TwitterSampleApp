@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7DC3380B2D194C5B003B7AE7 /* TweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC3380A2D194C5B003B7AE7 /* TweetDetailViewController.swift */; };
+		7DCA03EC2D2F8C8F00F73F10 /* TweetDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9F4992D0BD20F00FE9F1F /* TweetDataModel.swift */; };
 		7DD9F49B2D0BD20F00FE9F1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9F48C2D0BD20F00FE9F1F /* AppDelegate.swift */; };
 		7DD9F49C2D0BD20F00FE9F1F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9F48E2D0BD20F00FE9F1F /* HomeViewController.swift */; };
 		7DD9F49D2D0BD20F00FE9F1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9F4942D0BD20F00FE9F1F /* SceneDelegate.swift */; };
@@ -22,6 +23,8 @@
 		7DD9F4A92D0BD21200FE9F1F /* TwitterSampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9F4A72D0BD21200FE9F1F /* TwitterSampleAppTests.swift */; };
 		7DD9F4AD2D0BD21700FE9F1F /* TwitterSampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9F4AA2D0BD21600FE9F1F /* TwitterSampleAppUITests.swift */; };
 		7DD9F4AE2D0BD21700FE9F1F /* TwitterSampleAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9F4AB2D0BD21600FE9F1F /* TwitterSampleAppUITestsLaunchTests.swift */; };
+		7DF8907E2D2E76450026AFD1 /* TweetCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD9F4982D0BD20F00FE9F1F /* TweetCreateViewController.swift */; };
+		7DF8907F2D2E76570026AFD1 /* TweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC3380A2D194C5B003B7AE7 /* TweetDetailViewController.swift */; };
 		C6E2C6C1CC99946CA443AAA8 /* Pods_TwitterSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ECE57F4716F8E3C6E2A95F /* Pods_TwitterSampleApp.framework */; };
 		CCE8E0DE583ED1976F6D0B85 /* Pods_TwitterSampleAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C19EE92D4BC1D377FA53C218 /* Pods_TwitterSampleAppTests.framework */; };
 		D2E737948C0D9AF28DB5E74C /* Pods_TwitterSampleApp_TwitterSampleAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9CF1EDB745F35AAEC37643 /* Pods_TwitterSampleApp_TwitterSampleAppUITests.framework */; };
@@ -440,7 +443,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DF8907E2D2E76450026AFD1 /* TweetCreateViewController.swift in Sources */,
 				7DD9F4A92D0BD21200FE9F1F /* TwitterSampleAppTests.swift in Sources */,
+				7DF8907F2D2E76570026AFD1 /* TweetDetailViewController.swift in Sources */,
+				7DCA03EC2D2F8C8F00F73F10 /* TweetDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
