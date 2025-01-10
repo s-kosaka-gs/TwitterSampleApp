@@ -13,11 +13,13 @@ class exmpleTests: XCTestCase {
     func testExample() throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
         let vc = TweetCreateViewController()
-        let updatedText = vc.tweetField.text ?? ""
-        let maxCharasetCount: Int = 140
+        let check = vc.canCreateTweet(tweet: "Hello World")
         
-        XCTAssertTrue(maxCharasetCount > updatedText.count)
-        XCTAssertFalse(maxCharasetCount <= updatedText.count)
+//      140文字以内の場合にfalseになるかチェック
+        XCTAssertFalse(check)
+        
+//      140文字超えた場合にtrueになるかチェック
+        XCTAssertTrue(check)
 
     }
 
