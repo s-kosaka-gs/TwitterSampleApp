@@ -15,6 +15,7 @@ class TweetCreateViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var warningText: UILabel!
     
     var tweetData = TweetDataModel()
+    let maxCharasetCount: Int = 140
     
     override func viewDidLoad() {
         configurebutton()
@@ -25,10 +26,9 @@ class TweetCreateViewController: UIViewController, UITextFieldDelegate {
     }
     
     func canCreateTweet(tweet: String) -> Bool {
-        var check_tweet: Bool = false
-        let maxCharasetCount: Int = 140
+        var check_tweet: Bool = true
         
-        if tweet.count > maxCharasetCount {
+        if tweet.count < maxCharasetCount {
             check_tweet = true
         } else {
             check_tweet = false
@@ -85,19 +85,21 @@ extension TweetCreateViewController: UITextViewDelegate {
     // 入力した文字を保存・140文字の制限
     func textViewDidChange(_ tweetField: UITextView) {
         let updatedText = tweetField.text ?? ""
-        let maxCharasetCount: Int = 5
+        var check_count: Bool = true
         
-        if updatedText.count > maxCharasetCount {
+        check_count = canCreateTweet(tweet: updatedText)
+        
+        if check_count {
+            let warningText = ""
+            self.warningText.text = warningText
+            postButton.isEnabled = true
+            postButton.backgroundColor = .systemBlue
+        } else {
             let warningText = "\(maxCharasetCount)文字以内で入力してください"
             self.warningText.text = warningText
             self.warningText.textColor = .red
             postButton.isEnabled = false
             postButton.backgroundColor = .gray
-        } else {
-            let warningText = ""
-            self.warningText.text = warningText
-            postButton.isEnabled = true
-            postButton.backgroundColor = .systemBlue
         }
     }
 }
